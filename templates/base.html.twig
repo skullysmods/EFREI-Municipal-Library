@@ -8,9 +8,24 @@
         {% endblock %}
 
         {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    <header>
+        <button class="theme" style="background-color: white; color: black">Switch Theme Mode</button>
+    </header>
     <body>
         {% block body %}{% endblock %}
+        <script>
+            let themeColor = "light"
+            document.cookie = `themeColor=${themeColor}`
+            const themeBtn = document.querySelector("button.theme")
+
+            themeBtn.addEventListener("click", function() {
+                themeColor === "light" ? themeColor = "dark" : themeColor = "light"
+                document.cookie = `themeColor=${themeColor}`
+                themeColor === "light" ? (themeBtn.style.color = "black") && (themeBtn.style.backgroundColor = "white") : (themeBtn.style.color = "white") && (themeBtn.style.backgroundColor = "black")
+            })
+        </script>
     </body>
 </html>
