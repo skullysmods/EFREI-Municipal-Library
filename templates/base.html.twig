@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+<!--        Balise utilisé pour mettre en place CSP. Non utilsé dans notre cas car géré par package externe Nelmio
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://trusted.cdn.com;">-->
         {% block stylesheets %}
         {% endblock %}
 
@@ -12,20 +14,10 @@
         {% endblock %}
     </head>
     <header>
-        <button class="theme" style="background-color: white; color: black">Switch Theme Mode</button>
+        <button class="theme">Switch Theme Mode</button>
     </header>
     <body>
         {% block body %}{% endblock %}
-        <script>
-            let themeColor = "light"
-            document.cookie = `themeColor=${themeColor}`
-            const themeBtn = document.querySelector("button.theme")
-
-            themeBtn.addEventListener("click", function() {
-                themeColor === "light" ? themeColor = "dark" : themeColor = "light"
-                document.cookie = `themeColor=${themeColor}`
-                themeColor === "light" ? (themeBtn.style.color = "black") && (themeBtn.style.backgroundColor = "white") : (themeBtn.style.color = "white") && (themeBtn.style.backgroundColor = "black")
-            })
-        </script>
+        <script src="{{ asset('js/cookie.js') }}"></script>
     </body>
 </html>

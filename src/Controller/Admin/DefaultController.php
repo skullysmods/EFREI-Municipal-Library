@@ -12,10 +12,12 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class DefaultController extends AbstractController
 {
     #[Route('/', name: 'app_admin_home')]
-    #[IsGranted('ROLE_SUPER_ADMIN', message: 'You are not allowed to access the admin dashboard.')]
+    #[IsGranted('ROLE_ADMIN', message: 'You are not allowed to access the admin dashboard.')]
     public function index(): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_SUPER_ADMIN')) {
+            $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous devez être admin ou super admin pour accéder à cette page.');
+        }
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'DefaultController',
         ]);

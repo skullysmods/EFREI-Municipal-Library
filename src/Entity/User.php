@@ -28,8 +28,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(min: 8, max: 255)]
+    #[Assert\NotBlank(message: 'Un mot de passe est requis')]
+    #[Assert\Length(min: 8, minMessage: 'Votre mot de passe est trop court.')]
+    #[Assert\PasswordStrength(
+        message: 'Votre mot de passe est trop facile'
+    )]
+    #[Assert\Regex(
+        pattern: '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/',
+        message: 'Votre mot de passe doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial.',
+    )]
     private ?string $password = null;
 
     #[ORM\Column]
