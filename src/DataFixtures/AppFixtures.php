@@ -339,6 +339,45 @@ class AppFixtures extends Fixture
                 'CreatedAt' => '2024-02-03 16:33:45',
                 'UpdatedAt' => '2024-02-03 16:33:45',
             ],
+            [
+                'Id' => '25',
+                'Email' => 'superadmin@local.com',
+                'Password' => '$2y$13$cO9oxohCzCth0XYY11t2ZeAx16ReJdSJNcpXRgOJqrLpR38MO.nKC',
+                'Roles' => '["ROLE_SUPER_ADMIN"]',
+                'LastName' => 'Superadmin',
+                'FirstName' => 'Superadmin',
+                'Address' => '70, chemin du Monteil',
+                'ZipCode' => '33770',
+                'BirthDate' => '1982-09-25',
+                'CreatedAt' => '2024-02-03 16:33:45',
+                'UpdatedAt' => '2024-02-03 16:33:45',
+            ],
+            [
+                'Id' => '26',
+                'Email' => 'admin@local.com',
+                'Password' => '$2y$13$cO9oxohCzCth0XYY11t2ZeAx16ReJdSJNcpXRgOJqrLpR38MO.nKC',
+                'Roles' => '["ROLE_ADMIN"]',
+                'LastName' => 'Admin',
+                'FirstName' => 'Admin',
+                'Address' => '80, chemin du Monteil',
+                'ZipCode' => '33770',
+                'BirthDate' => '1982-09-25',
+                'CreatedAt' => '2024-02-03 16:33:45',
+                'UpdatedAt' => '2024-02-03 16:33:45',
+            ],
+            [
+                'Id' => '27',
+                'Email' => 'user@local.com',
+                'Password' => '$2y$13$cO9oxohCzCth0XYY11t2ZeAx16ReJdSJNcpXRgOJqrLpR38MO.nKC',
+                'Roles' => '["ROLE_USER"]',
+                'LastName' => 'User',
+                'FirstName' => 'User',
+                'Address' => '90, chemin du Monteil',
+                'ZipCode' => '33770',
+                'BirthDate' => '1982-09-25',
+                'CreatedAt' => '2024-02-03 16:33:45',
+                'UpdatedAt' => '2024-02-03 16:33:45',
+            ],
         ];
 
         $countriesData = [
@@ -2115,7 +2154,7 @@ Ecrivain, François Cheng a notamment publié Le Dit de Tianyi (Albin Michel, 19
 
             $user->setEmail($userData['Email']);
             $user->setPassword($userData['Password']);
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(json_decode($userData['Roles'], true));
             $user->setLastName($userData['LastName']);
             $user->setFirstName($userData['FirstName']);
             $user->setAddress($userData['Address']);
